@@ -1,7 +1,7 @@
 // Componentes base
 import React, { Component } from 'react'
 import {
-  SafeAreaView,
+  
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -11,18 +11,26 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Item2 from './src/Models/Item2';
-import ItemComponente from './src/Componentes/ItemComponente';
-import ItemDatabase from './src/Database/ItemDatabase';
-
 
 // Telas
 import Home from './src/Pages/Home'
 import Redirect from './src/Pages/Redirect'
 import Tela1 from './src/Pages/Tela1'
 import Tela2 from './src/Pages/Tela2'
-import Tela3 from './src/Pages/Tela3'
-import Tela4 from './src/Pages/Tela4'
+
+
+//Calculadora
+/*
+import Item2 from 'C:\Users\flper\Documents\EADSenac\RendaFixa\src\Models\Item2';
+import ItemComponente from 'C:\Users\flper\Documents\EADSenac\RendaFixa\src\Componentes\ItemComponente';
+import ItemDatabase from 'C:\Users\flper\Documents\EADSenac\RendaFixa\src\Database\ItemDatabase';
+*/
+import Item2 from '.src/Models/Item2';
+import ItemComponente from './src/Componentes/ItemComponente';
+import ItemDatabase from './src/Database/ItemDatabase';
+
+
+
 
 // Navegação
 import { NavigationContainer } from '@react-navigation/native'
@@ -70,8 +78,6 @@ export default class App extends Component {
     const banco = new ItemDatabase();
     banco.Inserir(itemNovo);
     this.Listar();
-  //  this.state.lista.push(itemNovo);
-  //  this.forceUpdate();
   }
 
   Atualizar = (item2) => {
@@ -97,8 +103,8 @@ export default class App extends Component {
   onPressSendNotification = () => {
     notificador.showNotification(
       1,
-      "Teste de Notificação",
-      "Vamos inserir uma mensagem um pouco mais longa para vermos o Android irá se adaptar ao conteúdo na tela?",
+      "Inflação",
+      "O IPCA nos últimos 12 meses está em 5,9%.",
       
       {}, // data
       {} // options
@@ -113,7 +119,7 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="">
+          <Stack.Screen name="Calculadora">
             {
               ({navigation}) => {
                 notificador.setNavegador(navigation)
@@ -130,8 +136,6 @@ export default class App extends Component {
           <Stack.Screen name="Redirect" component={Redirect} />
           <Stack.Screen name="Tela 1" component={Tela1} />
           <Stack.Screen name="Tela 2" component={Tela2} />
-          <Stack.Screen name="Tela 3" component={Tela3} />
-          <Stack.Screen name="Tela 4" component={Tela4} />
 
         </Stack.Navigator>
 

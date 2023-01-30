@@ -5,7 +5,7 @@ export default class Tela1 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{fontSize: 20}}>Tela destino de notificação.</Text>
+        <Text style={{fontSize: 20}}>Taxa Selic atual 13,75%</Text>
       </View>
     )
   }

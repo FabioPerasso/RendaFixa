@@ -5,7 +5,7 @@ export default class Tela2 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{fontSize: 20}}>Tem um CUPOM disponível para você.</Text>
+        <Text style={{fontSize: 20}}>Invista na XP.</Text>
       </View>
     )
   }
