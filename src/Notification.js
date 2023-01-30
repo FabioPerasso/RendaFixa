@@ -77,8 +77,8 @@ class Notification {
         PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
             id: 2, 
-            message: "Cupom", // (required)
-            date: new Date(Date.now() + 10 * 100000), // in 60 secs
+            message: "Índices", // (required)
+            date: new Date(Date.now() + 10 * 1000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
 
             /* Android Only Properties */
@@ -86,7 +86,7 @@ class Notification {
             repeatType: "minute",
             channelId: 'my-channel',
         });
-
+/*
         PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
             id: 3, 
@@ -94,7 +94,7 @@ class Notification {
             date: new Date(Date.now() + 20 * 100000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
 
-            /* Android Only Properties */
+            /* Android Only Properties 
             repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
             repeatType: "minute",
             channelId: 'my-channel',
@@ -106,11 +106,12 @@ class Notification {
             date: new Date(Date.now() + 30 * 100000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
 
-            /* Android Only Properties */
+            /* Android Only Properties 
             repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
             repeatType: "minute",
             channelId: 'my-channel',
         });
+        */
     }
 
 }

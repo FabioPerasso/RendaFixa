@@ -1,7 +1,6 @@
 // Componentes base
 import React, { Component } from 'react'
 import {
-  
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -19,19 +18,6 @@ import Tela1 from './src/Pages/Tela1'
 import Tela2 from './src/Pages/Tela2'
 
 
-//Calculadora
-/*
-import Item2 from 'C:\Users\flper\Documents\EADSenac\RendaFixa\src\Models\Item2';
-import ItemComponente from 'C:\Users\flper\Documents\EADSenac\RendaFixa\src\Componentes\ItemComponente';
-import ItemDatabase from 'C:\Users\flper\Documents\EADSenac\RendaFixa\src\Database\ItemDatabase';
-*/
-import Item2 from '.src/Models/Item2';
-import ItemComponente from './src/Componentes/ItemComponente';
-import ItemDatabase from './src/Database/ItemDatabase';
-
-
-
-
 // Navegação
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -46,54 +32,9 @@ const Stack = createStackNavigator();
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      investidor: "",
-      inicio: '',
-      prazo: '',
-      valor: 0.0,
-      imposto: "S",
-      taxapre: 0.0,
-      ipca: 0.0,
-    //  cdi: 0.0,
-    //  cdiperc: 0.0,
-      lista: []
-    }
-    this.Listar();
+    
   }
   
-  Listar = () => {
-    const banco = new ItemDatabase();
-    banco.Listar().then(
-      listaCompleta => {
-        this.setState({lista: listaCompleta})
-      }
-    )
-
-  }
-  
-/*  Cadastrar = (investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc) => {
-    const itemNovo = new Item2(investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc);*/
-  Cadastrar = (investidor, inicio, prazo, valor, imposto, taxapre, ipca) => {
-    const itemNovo = new Item2(investidor, inicio, prazo, valor, imposto, taxapre, ipca);
-    const banco = new ItemDatabase();
-    banco.Inserir(itemNovo);
-    this.Listar();
-  }
-
-  Atualizar = (item2) => {
-    const banco = new ItemDatabase();
-    banco.Atualizar(item2);
-    this.Listar();
-  }
-
-  Remover = (id) => {
-    const banco = new ItemDatabase();
-    banco.Remover(id);
-    this.Listar();
-  }
-
-
-
   componentDidMount() {
     notificador.configure();
     notificador.createChannel();
@@ -103,8 +44,8 @@ export default class App extends Component {
   onPressSendNotification = () => {
     notificador.showNotification(
       1,
-      "Inflação",
-      "O IPCA nos últimos 12 meses está em 5,9%.",
+      "Renda Fixa",
+      "Calcular CDB´s e LCA´s",
       
       {}, // data
       {} // options
@@ -119,12 +60,12 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Calculadora">
+          <Stack.Screen name="RENDA FIXA">
             {
               ({navigation}) => {
                 notificador.setNavegador(navigation)
                 return(
-                  <Home 
+                  <Home                 
                     MandarNotificacao={this.onPressSendNotification} 
                     CancelarNotificacao={this.onPressCancelAllLocalNotification} 
                   />
@@ -133,84 +74,14 @@ export default class App extends Component {
             }
           </Stack.Screen>
 
-          <Stack.Screen name="Redirect" component={Redirect} />
+          <Stack.Screen name="Redirect" component={Home} />
           <Stack.Screen name="Tela 1" component={Tela1} />
           <Stack.Screen name="Tela 2" component={Tela2} />
 
         </Stack.Navigator>
-
-     ( <ScrollView>
-        <View style={estilo.corpo}>
-          <Text style={estilo.titulo}>CONTROLE INVESTIDOR</Text>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor:</Text> 
-            <TextInput placeholder='Nome Investidor' onChangeText={(valorDigitado) => {this.setState({investidor: valorDigitado})}}  style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Inicio:</Text>
-            <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({inicio: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Prazo:</Text>
-            <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({prazo: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Valor:</Text>
-            <TextInput placeholder='Ex: 1000.00' onChangeText={(valorDigitado) => {this.setState({valor: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IR:</Text>
-            <TextInput placeholder='S' onChangeText={(valorDigitado) => {this.setState({imposto: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa Pré:</Text>
-            <TextInput placeholder='Ex: 12.5' onChangeText={(valorDigitado) => {this.setState({taxapre: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA:</Text>
-            <TextInput placeholder='Ex: 6.5' onChangeText={(valorDigitado) => {this.setState({ipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-        </View>
-        <View style={estilo.areaBotao}>
-          <TouchableOpacity 
-            onPress={() => this.Cadastrar(this.state.investidor, this.state.inicio, this.state.prazo,  this.state.valor, this.state.imposto, this.state.taxapre, this.state.ipca)}
-            style={estilo.botao}>
-            <Text style={{fontWeight: 'bold'}}>SALVAR</Text>
-          </TouchableOpacity>
-        </View>
-        {/*Lista de itens */}
-        <View>
-        <Text style={estilo.titulo}>Lista de Investidores</Text>
-        {
-          this.state.lista.map( elementoLista => (
-            <ItemComponente 
-            id={elementoLista.id}
-            item2={elementoLista}
-            investidor={elementoLista.investidor}
-            inicio={elementoLista.inicio}
-            prazo={elementoLista.prazo}
-            valor={elementoLista.valor} 
-            imposto={elementoLista.imposto}
-            taxapre={elementoLista.taxapre}
-            ipca={elementoLista.ipca}
-            atualizar={this.Atualizar}
-            remover={this.Remover} />
-              
-            
-            
-          )
-
-          )
-        }
-        </View>
+        </NavigationContainer>
+    
       
-      </ScrollView>
-
-     )
-
-      
-        
-      </NavigationContainer>
     )
   }
 }
@@ -237,7 +108,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'center'
   },
   entradaTexto: {
-    backgroundColor: 'grey',
+    backgroundColor: 'lightblue',
     color: 'black',
     borderWidth: 2,
     width: 180,

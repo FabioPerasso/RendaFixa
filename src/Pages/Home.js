@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
-// <Image style={{ width: 250, height: 200}}  source={require('./ComerBem.jpg')}></Image>
+<Image style={{ width: 250, height: 200}}  source={require('./ComerBem.jpg')}></Image>
 export default class Home extends Component {
   
   render() {
     return (
       <View style={styles.container}>
-        
+      
         <TouchableOpacity
           style={styles.button}
           onPress={this.props.MandarNotificacao}
         >
-          <Text>Inflação IPCA</Text>
+          <Text>Calculadora</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'grey',
+    fontWeight: 'bold',
+    backgroundColor: '#58FA82',
     padding: 10,
     width: 200,
     marginTop: 10
