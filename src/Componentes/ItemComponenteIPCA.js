@@ -41,7 +41,7 @@ return year2 * 365 + month2 * 30 + day2;
 }
   
 
-export default class ItemComponente extends Component {
+export default class ItemComponenteIPCA extends Component {
   
   getEstilo() {
     diasPrazo = this.props.prazo.substring(0,2);
@@ -52,6 +52,7 @@ export default class ItemComponente extends Component {
     mesInicio = this.props.inicio.substring(3,5)*30;
     AnoInicio = this.props.inicio.substring(6,10)*365;
     totInicio = parseInt(diasInicio) + parseInt(mesInicio) + parseInt(AnoInicio);
+    taxapre = ((1 + parseFloat(this.props.taxaipca/100)*(1 + parseFloat(this.props.ipca/100)))-1)*100;
    // difDias = totPrazo - getDias();
     difDias = totPrazo - totInicio;
     Anos = difDias / 365;
@@ -87,7 +88,7 @@ export default class ItemComponente extends Component {
             <TextInput style={this.getEstilo()}>Prazo: {this.props.prazo} </TextInput>
             <TextInput style={estilo.entradaTexto}>Dias: {difDias}     Anos: {Math.round(Anos*100)/100}</TextInput>
             <TextInput style={estilo.entradaTexto}>IR: {this.props.imposto}   Valor IR: {Math.round(ir*1000)/10}%</TextInput>
-            <TextInput style={estilo.entradaTexto}>Taxa Pré: {this.props.taxapre}% </TextInput>
+            <TextInput style={estilo.entradaTexto}>Taxa IPCA+: {this.props.taxaipca}% </TextInput>
             <TextInput style={estilo.entradaTexto}>IPCA......: {this.props.ipca}% </TextInput>
             <TextInput style={estilo.entradaTexto}>Valor: R$ {this.props.valor} </TextInput>
             <TextInput style={estilo.entradaTexto}>Juros: R$ {Math.round(Juros*100)/100}</TextInput>
@@ -97,7 +98,7 @@ export default class ItemComponente extends Component {
             </View>
             <View style={estilo.areaBotao}>
             <TouchableOpacity 
-            onPress={() => this.props.atualizar(this.props.item2)}
+            onPress={() => this.props.atualizar(this.props.item3)}
             style={estilo.botao}>
                 <Text style={{}}>ISENTO IR</Text>
             </TouchableOpacity>

@@ -78,7 +78,7 @@ class Notification {
             //... You can use all the options from localNotifications
             id: 2, 
             message: "Índices", // (required)
-            date: new Date(Date.now() + 10 * 1000), // in 60 secs
+            date: new Date(Date.now() + 10 * 100000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
 
             /* Android Only Properties */
@@ -86,20 +86,20 @@ class Notification {
             repeatType: "minute",
             channelId: 'my-channel',
         });
-/*
+
         PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
             id: 3, 
-            message: "Humor", // (required)
-            date: new Date(Date.now() + 20 * 100000), // in 60 secs
+            message: "IPCA", // (required)
+            date: new Date(Date.now() + 20 * 1000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
 
-            /* Android Only Properties 
+            /* Android Only Properties */
             repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
             repeatType: "minute",
             channelId: 'my-channel',
         });
-        PushNotification.localNotificationSchedule({
+/*        PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
             id: 4, 
             message: "Ofertas", // (required)

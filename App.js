@@ -10,13 +10,14 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { NativeBaseProvider , Box } from "native-base" ;  
 
 // Telas
 import Home from './src/Pages/Home'
-import Redirect from './src/Pages/Redirect'
 import Tela1 from './src/Pages/Tela1'
 import Tela2 from './src/Pages/Tela2'
-
+import Tela3 from './src/Pages/Tela3'
+import Redirect from './src/Pages/Redirect'
 
 // Navegação
 import { NavigationContainer } from '@react-navigation/native'
@@ -77,6 +78,7 @@ export default class App extends Component {
           <Stack.Screen name="Redirect" component={Home} />
           <Stack.Screen name="Tela 1" component={Tela1} />
           <Stack.Screen name="Tela 2" component={Tela2} />
+          <Stack.Screen name="Tela 3" component={Tela3} />
 
         </Stack.Navigator>
         </NavigationContainer>

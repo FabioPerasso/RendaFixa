@@ -13,7 +13,7 @@ comando para instalar o SQLite: npm install --save react-native-sqlite-storage
 
 */
 
-export default class ItemDatabase {
+export default class ItemDatabaseIPCA {
 
     Conectar() {   //**** CRUD => CREATE - aqui o BD é aberto e a tabela é criada se não existir *****/
         let db;
@@ -26,14 +26,16 @@ export default class ItemDatabase {
                     db = DB;
                     console.log("Banco de dados Aberto");
                     // verifica se existe alguma tabela
-                    db.executeSql('SELECT 1 FROM Item2 LIMIT 1').then(() => {
+                    db.executeSql('SELECT 1 FROM Item3 LIMIT 1').then(() => {
                         console.log("O banco de dados está pronto ... Executando Consulta SQL ...");
                     }).catch((error) => {
                         console.log("Erro Recebido: ", error);
                         console.log("O Banco de dados não está pronto... Criando tabela");
                         db.transaction((tx) => {
                             // aqui a tabela é criada, se ainda não existir
-                            tx.executeSql('CREATE TABLE IF NOT EXISTS Item2 (id INTEGER PRIMARY KEY AUTOINCREMENT, investidor varchar(30), inicio DATE, prazo DATE, valor DOUBLE, imposto varchar(1), taxapre DOUBLE, ipca DOUBLE, cdi DOUBLE, cdiperc DOUBLE)');
+                        //    tx.executeSql('CREATE TABLE IF NOT EXISTS Item2 (id INTEGER PRIMARY KEY AUTOINCREMENT, investidor varchar(30), inicio DATE, prazo DATE, valor DOUBLE, imposto varchar(1), taxapre DOUBLE, ipca DOUBLE, cdi DOUBLE, cdiperc DOUBLE)');
+                            tx.executeSql('CREATE TABLE IF NOT EXISTS Item3 (id INTEGER PRIMARY KEY AUTOINCREMENT, investidor varchar(30), inicio DATE, prazo DATE, valor DOUBLE, imposto varchar(1), taxaipca DOUBLE, ipca DOUBLE)');
+
                         }).then(() => {
                             console.log("Tabela criada com Sucesso");
                         }).catch(error => {
@@ -69,15 +71,15 @@ export default class ItemDatabase {
             this.Conectar().then((db) => {
                 db.transaction((tx) => {
                     //Query SQL para listar os dados da tabela   
-                    tx.executeSql('SELECT * FROM Item2', []).then(([tx, results]) => {
+                    tx.executeSql('SELECT * FROM Item3', []).then(([tx, results]) => {
                         console.log("Consulta completa");
                         var len = results.rows.length;
                         for (let i = 0; i < len; i++) {
-                            let row = results.rows.item2(i);
+                            let row = results.rows.item(i);
                         /*    const { id, investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc } = row;
                             lista.push({ id, investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc });*/
                             const { id, investidor, inicio, prazo, valor, imposto, taxapre, ipca} = row;
-                            lista.push({ id, investidor, inicio, prazo, valor, imposto, taxapre, ipca });
+                            lista.push({ id, investidor, inicio, prazo, valor, imposto, taxaipca, ipca });
                         }
                         console.log(lista);
                         resolve(lista);
@@ -100,7 +102,7 @@ export default class ItemDatabase {
                 db.transaction((tx) => {
                     //Query SQL para inserir um novo registro 
                  //   tx.executeSql('INSERT INTO Item2 (investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [item.investidor, item.prazo, item.valor, item.imposto, item.taxapre, item.ipca, item.cdi, item.cdiperc]).then(([tx, results]) => {
-                    tx.executeSql('INSERT INTO Item2 (investidor, inicio, prazo, valor, imposto, taxapre, ipca) VALUES (?, ?, ?, ?, ?, ?, ?)', [item.investidor, item.inicio, item.prazo, item.valor, item.imposto, item.taxapre, item.ipca]).then(([tx, results]) => {    
+                    tx.executeSql('INSERT INTO Item3 (investidor, inicio, prazo, valor, imposto, taxaipca, ipca) VALUES (?, ?, ?, ?, ?, ?, ?)', [item.investidor, item.inicio, item.prazo, item.valor, item.imposto, item.taxaipca, item.ipca]).then(([tx, results]) => {    
                         resolve(results);
                     });
                 }).then((result) => {
@@ -114,12 +116,12 @@ export default class ItemDatabase {
         });
     }
 
-    Atualizar(item) {   //**** CRUD => UPDATE - aqui a tabela é atualizada *****/
+    Atualizar(item3) {   //**** CRUD => UPDATE - aqui a tabela é atualizada *****/
         return new Promise((resolve) => {
             this.Conectar().then((db) => {
                 db.transaction((tx) => {
                     //Query SQL para atualizar um registro no banco        
-                    tx.executeSql('UPDATE Item2 SET imposto = ? WHERE id = ?', [item2.imposto = "N", item2.id]).then(([tx, results]) => {
+                    tx.executeSql('UPDATE Item3 SET imposto = ? WHERE id = ?', [item3.imposto = "N", item3.id]).then(([tx, results]) => {
                         resolve(results);
                     });
                 }).then((result) => {
@@ -138,7 +140,7 @@ export default class ItemDatabase {
             this.Conectar().then((db) => {
                 db.transaction((tx) => {
                     //Query SQL para deletar um item da base de dados    
-                    tx.executeSql('DELETE FROM Item2 WHERE Id = ?', [id]).then(([tx, results]) => {
+                    tx.executeSql('DELETE FROM Item3 WHERE Id = ?', [id]).then(([tx, results]) => {
                         console.log(results);
                         resolve(results);
                     });

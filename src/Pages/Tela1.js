@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import {
-  
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
+import { NativeBaseProvider , extendTheme, Text, Box, Image } from "native-base"
 
 import Item2 from '../Models/Item2';
 
@@ -71,72 +70,72 @@ export default class Tela1 extends Component {
 
   render() {
     return(
-      <ScrollView>
-        <View style={estilo.corpo}>
-          <Text style={estilo.titulo}>CONTROLE INVESTIDOR</Text>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor:</Text> 
-            <TextInput placeholder='Nome Investidor' onChangeText={(valorDigitado) => {this.setState({investidor: valorDigitado})}}  style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Inicio:</Text>
-            <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({inicio: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Prazo:</Text>
-            <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({prazo: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Valor:</Text>
-            <TextInput placeholder='Ex: 1000.00' onChangeText={(valorDigitado) => {this.setState({valor: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IR:</Text>
-            <TextInput placeholder='S' onChangeText={(valorDigitado) => {this.setState({imposto: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa Pré:</Text>
-            <TextInput placeholder='Ex: 12.5' onChangeText={(valorDigitado) => {this.setState({taxapre: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-          <View style={estilo.areaBotao}>
-            <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA:</Text>
-            <TextInput placeholder='Ex: 6.5' onChangeText={(valorDigitado) => {this.setState({ipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
-          </View>
-        </View>
-        <View style={estilo.areaBotao}>
-          <TouchableOpacity 
-            onPress={() => this.Cadastrar(this.state.investidor, this.state.inicio, this.state.prazo,  this.state.valor, this.state.imposto, this.state.taxapre, this.state.ipca)}
-            style={estilo.botao}>
-            <Text style={{fontWeight: 'bold'}}>SALVAR</Text>
-          </TouchableOpacity>
-        </View>
-        {/*Lista de itens */}
-        <View>
-        <Text style={estilo.titulo}>Lista de Investidores</Text>
-        {
-          this.state.lista.map( elementoLista => (
-            <ItemComponente 
-            id={elementoLista.id}
-            item2={elementoLista}
-            investidor={elementoLista.investidor}
-            inicio={elementoLista.inicio}
-            prazo={elementoLista.prazo}
-            valor={elementoLista.valor} 
-            imposto={elementoLista.imposto}
-            taxapre={elementoLista.taxapre}
-            ipca={elementoLista.ipca}
-            atualizar={this.Atualizar}
-            remover={this.Remover} />
-              
+      <NativeBaseProvider>
+        <ScrollView>
+          <View style={estilo.corpo}>
+            <Text style={estilo.titulo}>CONTROLE INVESTIDOR</Text>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor:</Text> 
+              <TextInput placeholder='Nome Investidor' onChangeText={(valorDigitado) => {this.setState({investidor: valorDigitado})}}  style={estilo.entradaTexto}></TextInput>
+            </View>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Inicio.......:</Text>
+              <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({inicio: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+            </View>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Prazo.......:</Text>
+              <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({prazo: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+            </View>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Valor........:</Text>
+              <TextInput placeholder='Ex: 1000.00' onChangeText={(valorDigitado) => {this.setState({valor: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+            </View>
             
-            
-          )
-
-          )
-        }
-        </View>
-      
-      </ScrollView>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa Pré..:</Text>
+              <TextInput placeholder='Ex: 12.5' onChangeText={(valorDigitado) => {this.setState({taxapre: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+            </View>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA.........:</Text>
+              <TextInput placeholder='Ex: 6.5' onChangeText={(valorDigitado) => {this.setState({ipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+            </View>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IR.............:</Text>
+              <TextInput placeholder='S ou N' onChangeText={(valorDigitado) => {this.setState({imposto: valorDigitado})}} style={estilo.entradaTexto1}></TextInput>
+            </View>
+          </View>
+          <View style={estilo.areaBotao}>
+            <TouchableOpacity 
+              onPress={() => this.Cadastrar(this.state.investidor, this.state.inicio, this.state.prazo,  this.state.valor, this.state.imposto, this.state.taxapre, this.state.ipca)}
+              style={estilo.botao}>
+              <Text style={{fontWeight: 'bold'}}>SALVAR</Text>
+            </TouchableOpacity>
+          </View>
+          {/*Lista de itens */}
+          <View>
+          <Text style={{textAlign: 'center'}}>==============================</Text>
+          <Text style={estilo.titulo}>Lista de Cálculos</Text>
+          {
+            this.state.lista.map( elementoLista => (
+              <ItemComponente 
+              id={elementoLista.id}
+              item2={elementoLista}
+              investidor={elementoLista.investidor}
+              inicio={elementoLista.inicio}
+              prazo={elementoLista.prazo}
+              valor={elementoLista.valor} 
+              imposto={elementoLista.imposto}
+              taxapre={elementoLista.taxapre}
+              ipca={elementoLista.ipca}
+              atualizar={this.Atualizar}
+              remover={this.Remover} />
+            )
+            )
+          }
+          </View>
+        
+        </ScrollView>
+      </NativeBaseProvider>
     )
   }
 
@@ -146,6 +145,7 @@ const estilo = StyleSheet.create({
   titulo: {
       fontSize: 18,
       margin: 10,
+      textAlign: 'center',
       color: 'black'
   },
   corpo: {
@@ -155,7 +155,6 @@ const estilo = StyleSheet.create({
   },
   botao: {
     backgroundColor: 'green',
-    
     width: 150,
     height:30,
     margin: 5,
@@ -170,6 +169,17 @@ const estilo = StyleSheet.create({
     width: 180,
     height: 40,
     margin: 3,
+    textAlign: 'center',
+    borderColor: 'green',
+    borderRadius: 20
+  },
+  entradaTexto1: {
+    backgroundColor: 'grey',
+    color: 'black',
+    borderWidth: 2,
+    width: 60,
+    height: 40,
+    margin: 3,
     borderColor: 'green',
     borderRadius: 20
   },
@@ -177,19 +187,10 @@ const estilo = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'left'
     
   }
 
 })
 
-/*
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={{fontSize: 20}}>Inflação atual= 5,8%</Text>
-      </View>
-    )
-  }
-}
 
-/* Estilização do projeto */
