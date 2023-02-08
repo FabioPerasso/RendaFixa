@@ -135,6 +135,25 @@ export default class ItemDatabase {
         });
     }
 
+    Rever(item2) {   //**** CRUD => UPDATE - aqui a tabela é atualizada *****/
+        return new Promise((resolve) => {
+            this.Conectar().then((db) => {
+                db.transaction((tx) => {
+                    //Query SQL para atualizar um registro no banco        
+                    tx.executeSql('UPDATE Item2 SET imposto = ? WHERE id = ?', [item2.imposto = "S", item2.id]).then(([tx, results]) => {
+                        resolve(results);
+                    });
+                }).then((result) => {
+                    this.Desconectar(db);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+    }
+
     Remover(id) {   //**** CRUD => DELETE - aqui um registro da tabela é removido *****/
         return new Promise((resolve) => {
             this.Conectar().then((db) => {

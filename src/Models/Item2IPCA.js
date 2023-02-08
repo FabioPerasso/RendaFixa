@@ -6,6 +6,7 @@ export default class Item3{
         this.prazo = prazo;
         this.valor = valor;
         this.imposto = imposto;
+    //    this.taxapre = taxapre;
         this.taxaipca = taxaipca;
         this.ipca = ipca;
      //   this.cdi = cdi;

@@ -8,12 +8,12 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { NativeBaseProvider , extendTheme, Text, Box, Image } from "native-base"
+import { NativeBaseProvider , Text, Box, Image } from "native-base"
 
-import Item3 from '../Models/Item2IPCA';
+import Item4 from '../Models/Item2CDI';
 
-import ItemComponente from '../Componentes/ItemComponenteIPCA';
-import ItemDatabase from '../Database/ItemDatabaseIPCA';
+import ItemComponente3 from '../Componentes/ItemComponenteCDI';
+import ItemDatabase3 from '../Database/ItemDatabaseCDI';
 
 export default class Tela3 extends Component {
   constructor(props){
@@ -24,17 +24,16 @@ export default class Tela3 extends Component {
       prazo: '',
       valor: 0.0,
       imposto: "S",
-      taxaipca: 0.0,
+      taxacdi: 0.0,
+      cdi: 0.0,
       ipca: 0.0,
-    //  cdi: 0.0,
-    //  cdiperc: 0.0,
       lista: []
     }
     this.Listar();
   }
   
   Listar = () => {
-    const banco = new ItemDatabase();
+    const banco = new ItemDatabase3();
     banco.Listar().then(
       listaCompleta => {
         this.setState({lista: listaCompleta})
@@ -43,23 +42,27 @@ export default class Tela3 extends Component {
 
   }
   
-/*  Cadastrar = (investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc) => {
-    const itemNovo = new Item2(investidor, inicio, prazo, valor, imposto, taxapre, ipca, cdi, cdiperc);*/
-  Cadastrar = (investidor, inicio, prazo, valor, imposto, taxaipca, ipca) => {
-    const itemNovo = new Item3(investidor, inicio, prazo, valor, imposto, taxaipca, ipca);
-    const banco = new ItemDatabase();
+  Cadastrar = (investidor, inicio, prazo, valor, imposto, taxacdi, cdi, ipca) => {
+    const itemNovo = new Item4(investidor, inicio, prazo, valor, imposto, taxacdi, cdi, ipca);
+    const banco = new ItemDatabase3();
     banco.Inserir(itemNovo);
     this.Listar();
     }
 
-  Atualizar = (item3) => {
-    const banco = new ItemDatabase();
-    banco.Atualizar(item3);
+  Atualizar = (item4) => {
+    const banco = new ItemDatabase3();
+    banco.Atualizar(item4);
+    this.Listar();
+  }
+
+  Rever = (item4) => {
+    const banco = new ItemDatabase3();
+    banco.Rever(item4);
     this.Listar();
   }
 
   Remover = (id) => {
-    const banco = new ItemDatabase();
+    const banco = new ItemDatabase3();
     banco.Remover(id);
     this.Listar();
   }
@@ -71,7 +74,7 @@ export default class Tela3 extends Component {
       <NativeBaseProvider>
         <ScrollView>
           <View style={estilo.corpo}>
-            <Text style={estilo.titulo}>CALCULADORA IPCA+</Text>
+            <Text style={estilo.titulo}>Calculadora CDI+</Text>
             <View style={estilo.areaBotao}>
               <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor:</Text> 
               <TextInput placeholder='Nome Investidor' onChangeText={(valorDigitado) => {this.setState({investidor: valorDigitado})}}  style={estilo.entradaTexto}></TextInput>
@@ -90,8 +93,12 @@ export default class Tela3 extends Component {
             </View>
             
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa IPCA+..:</Text>
-              <TextInput placeholder='Ex: 12.5' onChangeText={(valorDigitado) => {this.setState({taxaipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa CDI...:</Text>
+              <TextInput placeholder='Ex: 100' onChangeText={(valorDigitado) => {this.setState({taxacdi: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
+            </View>
+            <View style={estilo.areaBotao}>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>CDI........:</Text>
+              <TextInput placeholder='Ex: 12.65' onChangeText={(valorDigitado) => {this.setState({cdi: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
               <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA.........:</Text>
@@ -104,7 +111,7 @@ export default class Tela3 extends Component {
           </View>
           <View style={estilo.areaBotao}>
             <TouchableOpacity 
-              onPress={() => this.Cadastrar(this.state.investidor, this.state.inicio, this.state.prazo,  this.state.valor, this.state.imposto, this.state.taxaipca, this.state.ipca)}
+              onPress={() => this.Cadastrar(this.state.investidor, this.state.inicio, this.state.prazo,  this.state.valor, this.state.imposto, this.state.taxacdi, this.state.cdi, this.state.ipca)}
               style={estilo.botao}>
               <Text style={{fontWeight: 'bold'}}>SALVAR</Text>
             </TouchableOpacity>
@@ -112,20 +119,22 @@ export default class Tela3 extends Component {
           {/*Lista de itens */}
           <View>
           <Text style={{textAlign: 'center'}}>==============================</Text>
-          <Text style={estilo.titulo}>Lista de Cálculos IPCA</Text>
+          <Text style={estilo.titulo}>Lista de Cálculos CDI</Text>
           {
             this.state.lista.map( elementoLista => (
-              <ItemComponente 
+              <ItemComponente3 
               id={elementoLista.id}
-              item3={elementoLista}
+              item4={elementoLista}
               investidor={elementoLista.investidor}
               inicio={elementoLista.inicio}
               prazo={elementoLista.prazo}
               valor={elementoLista.valor} 
               imposto={elementoLista.imposto}
-              taxaipca={elementoLista.taxaipca}
+              taxacdi={elementoLista.taxacdi}
+              cdi={elementoLista.cdi}
               ipca={elementoLista.ipca}
               atualizar={this.Atualizar}
+              rever={this.Rever}
               remover={this.Remover} />
             )
             )
@@ -161,7 +170,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'center'
   },
   entradaTexto: {
-    backgroundColor: 'grey',
+    backgroundColor: '#A9BCF5',
     color: 'black',
     borderWidth: 2,
     width: 180,

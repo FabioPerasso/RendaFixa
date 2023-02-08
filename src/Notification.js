@@ -76,7 +76,7 @@ class Notification {
     buildNotificationSchedule = () => {
         PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
-            id: 2, 
+            id: 4, 
             message: "Índices", // (required)
             date: new Date(Date.now() + 10 * 100000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
@@ -87,14 +87,14 @@ class Notification {
             channelId: 'my-channel',
         });
 
-        PushNotification.localNotificationSchedule({
+/*        PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
-            id: 3, 
-            message: "IPCA", // (required)
-            date: new Date(Date.now() + 20 * 1000), // in 60 secs
+            id: 4, 
+            message: "Inflação IPCA", // (required)
+            date: new Date(Date.now() + 20 * 10000), // in 60 secs
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
 
-            /* Android Only Properties */
+            /* Android Only Properties 
             repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
             repeatType: "minute",
             channelId: 'my-channel',

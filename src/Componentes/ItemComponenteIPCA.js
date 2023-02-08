@@ -53,7 +53,7 @@ export default class ItemComponenteIPCA extends Component {
     AnoInicio = this.props.inicio.substring(6,10)*365;
     totInicio = parseInt(diasInicio) + parseInt(mesInicio) + parseInt(AnoInicio);
     taxapre = ((1 + parseFloat(this.props.taxaipca/100)*(1 + parseFloat(this.props.ipca/100)))-1)*100;
-   // difDias = totPrazo - getDias();
+   
     difDias = totPrazo - totInicio;
     Anos = difDias / 365;
     ir= 0.0;
@@ -64,7 +64,8 @@ export default class ItemComponenteIPCA extends Component {
             else { if ( difDias < 720) {ir = 0.175}
                   else {{ir = 0.15}} }}}
     
-    Juros = (Math.pow((1 + parseFloat(this.props.taxapre/100)),Anos)-1) * parseFloat(this.props.valor) * (1-ir);
+  //  Juros = (Math.pow((1 + parseFloat(this.props.taxapre/100)),Anos)-1) * parseFloat(this.props.valor) * (1-ir);
+    Juros = (Math.pow((1 + parseFloat(this.props.taxaipca/100))*(1 + parseFloat(this.props.ipca/100)),Anos)-1) * parseFloat(this.props.valor) * (1-ir);
     Retorno = parseFloat(this.props.valor) + Juros;
     TaxaEfetiva = (Math.pow(Retorno / parseFloat(this.props.valor),(1/Anos)) - 1)*100;
     TaxaReal = (((1 + TaxaEfetiva/100) / (1 + parseFloat(this.props.ipca) / 100)) - 1)*100;
@@ -97,16 +98,21 @@ export default class ItemComponenteIPCA extends Component {
             <TextInput style={estilo.entradaTexto}>Taxa Real sobre Inflação: {Math.round(TaxaReal*100)/100} % </TextInput>
             </View>
             <View style={estilo.areaBotao}>
-            <TouchableOpacity 
-            onPress={() => this.props.atualizar(this.props.item3)}
-            style={estilo.botao}>
-                <Text style={{}}>ISENTO IR</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-            onPress={() => this.props.remover(this.props.id)}
-            style={estilo.botao}>
-                <Text style={{}}>REMOVER</Text>
-            </TouchableOpacity>
+              <TouchableOpacity 
+                  onPress={() => this.props.rever(this.props.item3)}
+                  style={estilo.botao}>
+                  <Text style={{}}>IR</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                  onPress={() => this.props.atualizar(this.props.item3)}
+                  style={estilo.botao}>
+                  <Text style={{}}>ISENTO IR</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                  onPress={() => this.props.remover(this.props.id)}
+                  style={estilo.botao}>
+                  <Text style={{}}>REMOVER</Text>
+              </TouchableOpacity>
             </View>
         </View>
       </NativeBaseProvider>
@@ -126,8 +132,8 @@ const estilo = StyleSheet.create({
     justifyContent: 'center'
   },
   botao: {
-    backgroundColor: 'green',
-    width: 150,
+    backgroundColor: '#F5BCA9',
+    width: 100,
     height:30,
     margin: 5,
     borderRadius:30,

@@ -17,6 +17,7 @@ import Home from './src/Pages/Home'
 import Tela1 from './src/Pages/Tela1'
 import Tela2 from './src/Pages/Tela2'
 import Tela3 from './src/Pages/Tela3'
+import Tela4 from './src/Pages/Tela4'
 import Redirect from './src/Pages/Redirect'
 
 // Navegação
@@ -42,11 +43,33 @@ export default class App extends Component {
     notificador.buildNotificationSchedule();
   }
 
-  onPressSendNotification = () => {
+  onPressSendNotification1 = () => {
     notificador.showNotification(
       1,
       "Renda Fixa",
-      "Calcular CDB´s e LCA´s",
+      "Calcular Pré-fixados",
+      
+      {}, // data
+      {} // options
+    )
+  }
+
+  onPressSendNotification2 = () => {
+    notificador.showNotification(
+      2,
+      "Renda Fixa",
+      "Calcular IPCA+Taxa",
+      
+      {}, // data
+      {} // options
+    )
+  }
+
+  onPressSendNotification3 = () => {
+    notificador.showNotification(
+      3,
+      "Renda Fixa",
+      "Calcular %CDI Pós",
       
       {}, // data
       {} // options
@@ -67,7 +90,9 @@ export default class App extends Component {
                 notificador.setNavegador(navigation)
                 return(
                   <Home                 
-                    MandarNotificacao={this.onPressSendNotification} 
+                    MandarNotificacao1={this.onPressSendNotification1} 
+                    MandarNotificacao2={this.onPressSendNotification2} 
+                    MandarNotificacao3={this.onPressSendNotification3}
                     CancelarNotificacao={this.onPressCancelAllLocalNotification} 
                   />
                 )
@@ -75,10 +100,11 @@ export default class App extends Component {
             }
           </Stack.Screen>
 
-          <Stack.Screen name="Redirect" component={Home} />
+          <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Tela 1" component={Tela1} />
           <Stack.Screen name="Tela 2" component={Tela2} />
           <Stack.Screen name="Tela 3" component={Tela3} />
+          <Stack.Screen name="Tela 4" component={Tela4} />
 
         </Stack.Navigator>
         </NavigationContainer>

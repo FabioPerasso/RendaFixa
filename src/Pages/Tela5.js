@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 
-export default class Tela3 extends Component {
+export default class Tela4 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{fontSize: 20}}>Nunca sei se é fome ou vontade de comer, mas para não ter dúvida, eu sempre como.</Text>
+        <Text style={{fontSize: 20}}>Inflação atual= 5,8%</Text>
       </View>
     )
   }

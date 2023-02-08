@@ -41,7 +41,7 @@ return year2 * 365 + month2 * 30 + day2;
 }
   
 
-export default class ItemComponente extends Component {
+export default class ItemComponenteCDI extends Component {
   
   getEstilo() {
     diasPrazo = this.props.prazo.substring(0,2);
@@ -52,7 +52,8 @@ export default class ItemComponente extends Component {
     mesInicio = this.props.inicio.substring(3,5)*30;
     AnoInicio = this.props.inicio.substring(6,10)*365;
     totInicio = parseInt(diasInicio) + parseInt(mesInicio) + parseInt(AnoInicio);
-   // difDias = totPrazo - getDias();
+   // taxapre = ((1 + parseFloat(this.props.taxacdi/100)*(1 + parseFloat(this.props.ipca/100)))-1)*100;
+   
     difDias = totPrazo - totInicio;
     Anos = difDias / 365;
     ir= 0.0;
@@ -63,7 +64,8 @@ export default class ItemComponente extends Component {
             else { if ( difDias < 720) {ir = 0.175}
                   else {{ir = 0.15}} }}}
     
-    Juros = (Math.pow((1 + parseFloat(this.props.taxapre/100)),Anos)-1) * parseFloat(this.props.valor) * (1-ir);
+  //  Juros = (Math.pow((1 + parseFloat(this.props.taxapre/100)),Anos)-1) * parseFloat(this.props.valor) * (1-ir);
+    Juros = (Math.pow(1+(parseFloat(this.props.taxacdi/100)*parseFloat(this.props.cdi/100)),Anos)-1) * parseFloat(this.props.valor) * (1-ir);
     Retorno = parseFloat(this.props.valor) + Juros;
     TaxaEfetiva = (Math.pow(Retorno / parseFloat(this.props.valor),(1/Anos)) - 1)*100;
     TaxaReal = (((1 + TaxaEfetiva/100) / (1 + parseFloat(this.props.ipca) / 100)) - 1)*100;
@@ -82,12 +84,13 @@ export default class ItemComponente extends Component {
         <View>
             <View style={{padding: 17, margin: 5}}>
             <Text style={estilo.titulo}>Cálculo(id): {this.props.id}</Text>
-            <TextInput style={estilo.entradaTexto}>Investidor: {this.props.investidor}        Hoje: {getCurrentDate()}</TextInput>
+            <TextInput style={estilo.entradaTexto}>Inv.: {this.props.investidor}        Hoje: {getCurrentDate()}</TextInput>
             <TextInput style={this.getEstilo()}>Inicio: {this.props.inicio} </TextInput>
             <TextInput style={this.getEstilo()}>Prazo: {this.props.prazo} </TextInput>
             <TextInput style={estilo.entradaTexto}>Dias: {difDias}     Anos: {Math.round(Anos*100)/100}</TextInput>
             <TextInput style={estilo.entradaTexto}>IR: {this.props.imposto}   Valor IR: {Math.round(ir*1000)/10}%</TextInput>
-            <TextInput style={estilo.entradaTexto}>Taxa Pré..: {this.props.taxapre}% </TextInput>
+            <TextInput style={estilo.entradaTexto}>Taxa CDI: {this.props.taxacdi}% </TextInput>
+            <TextInput style={estilo.entradaTexto}>CDI.....: {this.props.cdi}% </TextInput>
             <TextInput style={estilo.entradaTexto}>IPCA......: {this.props.ipca}% </TextInput>
             <TextInput style={estilo.entradaTexto}>Valor: R$ {this.props.valor} </TextInput>
             <TextInput style={estilo.entradaTexto}>Juros: R$ {Math.round(Juros*100)/100}</TextInput>
@@ -97,19 +100,19 @@ export default class ItemComponente extends Component {
             </View>
             <View style={estilo.areaBotao}>
               <TouchableOpacity 
-                onPress={() => this.props.rever(this.props.item2)}
-                style={estilo.botao}>
-                <Text style={{}}>IR</Text>
+                  onPress={() => this.props.rever(this.props.item4)}
+                  style={estilo.botao}>
+                  <Text style={{}}>IR</Text>
               </TouchableOpacity>
               <TouchableOpacity 
-                onPress={() => this.props.atualizar(this.props.item2)}
-                style={estilo.botao}>
-                <Text style={{}}>ISENTO IR</Text>
+                  onPress={() => this.props.atualizar(this.props.item4)}
+                  style={estilo.botao}>
+                  <Text style={{}}>ISENTO IR</Text>
               </TouchableOpacity>
               <TouchableOpacity 
-                onPress={() => this.props.remover(this.props.id)}
-                style={estilo.botao}>
-                <Text style={{}}>REMOVER</Text>
+                  onPress={() => this.props.remover(this.props.id)}
+                  style={estilo.botao}>
+                  <Text style={{}}>REMOVER</Text>
               </TouchableOpacity>
             </View>
         </View>

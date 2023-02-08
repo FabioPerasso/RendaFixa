@@ -8,7 +8,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { NativeBaseProvider , extendTheme, Text, Box, Image } from "native-base"
+import { NativeBaseProvider , Text, Box, Image } from "native-base"
 
 import Item2 from '../Models/Item2';
 
@@ -60,6 +60,12 @@ export default class Tela1 extends Component {
     this.Listar();
   }
 
+  Rever= (item2) => {
+    const banco = new ItemDatabase();
+    banco.Rever(item2);
+    this.Listar();
+  }
+
   Remover = (id) => {
     const banco = new ItemDatabase();
     banco.Remover(id);
@@ -73,7 +79,7 @@ export default class Tela1 extends Component {
       <NativeBaseProvider>
         <ScrollView>
           <View style={estilo.corpo}>
-            <Text style={estilo.titulo}>CONTROLE INVESTIDOR</Text>
+            <Text style={estilo.titulo}>Calculadora PRÉ-FIXADO</Text>
             <View style={estilo.areaBotao}>
               <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor:</Text> 
               <TextInput placeholder='Nome Investidor' onChangeText={(valorDigitado) => {this.setState({investidor: valorDigitado})}}  style={estilo.entradaTexto}></TextInput>
@@ -128,6 +134,7 @@ export default class Tela1 extends Component {
               taxapre={elementoLista.taxapre}
               ipca={elementoLista.ipca}
               atualizar={this.Atualizar}
+              rever={this.Rever}
               remover={this.Remover} />
             )
             )
@@ -163,7 +170,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'center'
   },
   entradaTexto: {
-    backgroundColor: 'grey',
+    backgroundColor:'#40FF00',
     color: 'black',
     borderWidth: 2,
     width: 180,
@@ -187,7 +194,7 @@ const estilo = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'left'
+    textAlign: 'left',
     
   }
 
