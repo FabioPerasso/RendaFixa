@@ -53,7 +53,7 @@ export default class ItemComponenteIPCA extends Component {
     AnoInicio = this.props.inicio.substring(6,10)*365;
     totInicio = parseInt(diasInicio) + parseInt(mesInicio) + parseInt(AnoInicio);
     taxapre = ((1 + parseFloat(this.props.taxaipca/100)*(1 + parseFloat(this.props.ipca/100)))-1)*100;
-   
+    difHoje = totPrazo - getDias();
     difDias = totPrazo - totInicio;
     Anos = difDias / 365;
     ir= 0.0;
@@ -69,8 +69,8 @@ export default class ItemComponenteIPCA extends Component {
     Retorno = parseFloat(this.props.valor) + Juros;
     TaxaEfetiva = (Math.pow(Retorno / parseFloat(this.props.valor),(1/Anos)) - 1)*100;
     TaxaReal = (((1 + TaxaEfetiva/100) / (1 + parseFloat(this.props.ipca) / 100)) - 1)*100;
-
-    if ( totPrazo < totInicio)  {
+    Ganho = Juros / parseFloat(this.props.valor) * 100;
+    if ( difHoje < 0 | difDias <0 )  {
       return {color: 'red', fontSize: 12, borderWidth: 2, height: 40, backgroundColor: 'yellow'}
     } else {
       return {color: 'black',fontSize: 12, borderWidth: 2, height: 40}
@@ -84,15 +84,15 @@ export default class ItemComponenteIPCA extends Component {
         <View>
             <View style={{padding: 17, margin: 5}}>
             <Text style={estilo.titulo}>Cálculo(id): {this.props.id}</Text>
-            <TextInput style={estilo.entradaTexto}>Investidor: {this.props.investidor}        Hoje: {getCurrentDate()}</TextInput>
+            <TextInput style={estilo.entradaTexto}>Invest: {this.props.investidor}        Hoje: {getCurrentDate()}</TextInput>
             <TextInput style={this.getEstilo()}>Inicio: {this.props.inicio} </TextInput>
             <TextInput style={this.getEstilo()}>Prazo: {this.props.prazo} </TextInput>
             <TextInput style={estilo.entradaTexto}>Dias: {difDias}     Anos: {Math.round(Anos*100)/100}</TextInput>
-            <TextInput style={estilo.entradaTexto}>IR: {this.props.imposto}   Valor IR: {Math.round(ir*1000)/10}%</TextInput>
-            <TextInput style={estilo.entradaTexto}>Taxa IPCA+: {this.props.taxaipca}% </TextInput>
-            <TextInput style={estilo.entradaTexto}>IPCA......: {this.props.ipca}% </TextInput>
-            <TextInput style={estilo.entradaTexto}>Valor: R$ {this.props.valor} </TextInput>
-            <TextInput style={estilo.entradaTexto}>Juros: R$ {Math.round(Juros*100)/100}</TextInput>
+            <TextInput style={estilo.entradaTexto}>IR: {this.props.imposto}                Valor IR: {Math.round(ir*1000)/10}%</TextInput>
+            <TextInput style={estilo.entradaTexto}>Taxa IPCA+..: {this.props.taxaipca}% </TextInput>
+            <TextInput style={estilo.entradaTexto}>IPCA.............: {this.props.ipca}% </TextInput>
+            <TextInput style={estilo.entradaTexto}>Valor.....: R$ {this.props.valor} </TextInput>
+            <TextInput style={estilo.entradaTexto}>Juros....: R$ {Math.round(Juros*100)/100}       Ganho: {Math.round(Ganho*100)/100}%</TextInput>
             <TextInput style={estilo.entradaTexto}>Retorno: R$ {Math.round(Retorno*100)/100} </TextInput>
             <TextInput style={estilo.entradaTexto}>Taxa Anual Efetiva.........: {Math.round(TaxaEfetiva*100)/100} % </TextInput>
             <TextInput style={estilo.entradaTexto}>Taxa Real sobre Inflação: {Math.round(TaxaReal*100)/100} % </TextInput>

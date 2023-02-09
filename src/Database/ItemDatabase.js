@@ -71,7 +71,7 @@ export default class ItemDatabase {
             this.Conectar().then((db) => {
                 db.transaction((tx) => {
                     //Query SQL para listar os dados da tabela   
-                    tx.executeSql('SELECT * FROM Item2', []).then(([tx, results]) => {
+                    tx.executeSql('SELECT * FROM Item2 order by id desc', []).then(([tx, results]) => {
                         console.log("Consulta completa");
                         var len = results.rows.length;
                         for (let i = 0; i < len; i++) {

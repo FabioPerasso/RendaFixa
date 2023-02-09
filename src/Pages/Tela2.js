@@ -77,28 +77,28 @@ export default class Tela2 extends Component {
           <View style={estilo.corpo}>
             <Text style={estilo.titulo}>Calculadora IPCA+</Text>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor:</Text> 
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Investidor..:</Text> 
               <TextInput placeholder='Nome Investidor' onChangeText={(valorDigitado) => {this.setState({investidor: valorDigitado})}}  style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Inicio.......:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Inicio.........:</Text>
               <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({inicio: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Prazo.......:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Prazo.........:</Text>
               <TextInput placeholder='dd/mm/aaaa' onChangeText={(valorDigitado) => {this.setState({prazo: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Valor........:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Valor..........:</Text>
               <TextInput placeholder='Ex: 1000.00' onChangeText={(valorDigitado) => {this.setState({valor: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa IPCA+..:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa IPCA+:</Text>
               <TextInput placeholder='Ex: 5.5' onChangeText={(valorDigitado) => {this.setState({taxaipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA.........:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA...........:</Text>
               <TextInput placeholder='Ex: 6.5' onChangeText={(valorDigitado) => {this.setState({ipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>

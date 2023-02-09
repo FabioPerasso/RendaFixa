@@ -93,15 +93,15 @@ export default class Tela3 extends Component {
             </View>
             
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa CDI...:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>Taxa CDI.:</Text>
               <TextInput placeholder='Ex: 100' onChangeText={(valorDigitado) => {this.setState({taxacdi: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>CDI........:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>CDI..........:</Text>
               <TextInput placeholder='Ex: 12.65' onChangeText={(valorDigitado) => {this.setState({cdi: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>
-              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA.........:</Text>
+              <Text style={{ color: 'blue', margin: 5, justifyContent: 'center'}}>IPCA.......:</Text>
               <TextInput placeholder='Ex: 6.5' onChangeText={(valorDigitado) => {this.setState({ipca: valorDigitado})}} style={estilo.entradaTexto}></TextInput>
             </View>
             <View style={estilo.areaBotao}>

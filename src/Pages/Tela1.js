@@ -170,7 +170,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'center'
   },
   entradaTexto: {
-    backgroundColor:'#40FF00',
+    backgroundColor:'#A9BCF5',
     color: 'black',
     borderWidth: 2,
     width: 180,
